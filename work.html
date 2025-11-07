@@ -1,0 +1,511 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Our Work | DIRECT BUILD GROUP</title>
+
+  <link rel="icon" href="assets/images/favicon.ico" type="image/x-icon">
+  <meta property="og:title" content="Our Work | DIRECT BUILD GROUP">
+  <meta property="og:description" content="Discover our top construction projects featuring sustainable and modern designs.">
+  <meta property="og:image" content="assets/images/og-banner.jpg">
+  <meta property="og:type" content="website">
+
+  <!-- animate.css kept -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css">
+
+  <style>
+    /* ========== Variables & base ========== */
+    :root{
+      --accent: #17d4b5;
+      --accent-2: #ffcc00;
+      --bg-dark: #0f1720;
+      --panel-dark: #12171c;
+      --text-dark: #e6f6f3;
+      --bg-light: #ffffff;
+      --panel-light: #f7f9f8;
+      --text-light: #0f1720;
+      --nav-width: 200px;
+      --transition: 0.28s ease;
+      --max-width: 1200px;
+    }
+
+    /* adaptive theme */
+    body { --bg: var(--bg-dark); --panel: var(--panel-dark); --text: var(--text-dark); --muted: #9aa4ad; color-scheme: dark; }
+    body.light-mode { --bg: var(--bg-light); --panel: var(--panel-light); --text: var(--text-light); --muted: #6c757d; color-scheme: light; }
+
+    html,body{ height:100%; margin:0; font-family: "Poppins", Inter, system-ui, Arial; background:var(--bg); color:var(--text); -webkit-font-smoothing:antialiased; }
+    a{ color:var(--accent); text-decoration:none; }
+
+    img,video{ max-width:100%; display:block; border-radius:10px; }
+
+    /* ========== Preloader & progress ========== */
+    .preloader{ position:fixed; inset:0; display:flex; align-items:center; justify-content:center; background:var(--bg); z-index:9000; transition:opacity .45s ease, visibility .45s; }
+    .preloader.hidden{ opacity:0; visibility:hidden; pointer-events:none; }
+    .preloader img{ width:140px; border-radius:8px; filter: drop-shadow(0 16px 40px rgba(0,0,0,0.25)); }
+
+    #progress-bar { position:fixed; top:0; left:0; height:4px; width:0; background:var(--accent); z-index:8800; transition:width .12s linear; }
+
+    /* ========== Header ========== */
+    .main-header{
+      position:sticky; top:0; z-index:8000; display:flex; align-items:center; justify-content:space-between; gap:12px; padding:12px 18px;
+      backdrop-filter: blur(6px); background: linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01));
+      border-bottom: 1px solid rgba(255,255,255,0.02);
+    }
+    body.light-mode .main-header{ background: linear-gradient(180deg, rgba(0,0,0,0.02), rgba(0,0,0,0.01)); }
+
+    .left-header{ display:flex; align-items:center; gap:12px; }
+    .logo{ display:flex; align-items:center; gap:10px; }
+    .logo img{ width:100px; border-radius:6px; }
+    .brand{ font-weight:800; color:var(--accent-2); }
+
+    nav.desktop{ display:flex; gap:14px; align-items:center; margin-left:12px; }
+    nav.desktop a{ font-weight:700; color:var(--text); padding:6px 8px; border-radius:8px; }
+    nav.desktop a.active{ color:var(--accent); }
+
+    .socials{ display:flex; gap:8px; align-items:center; }
+    .socials img{ width:22px; height:22px; transition:transform var(--transition); filter:none; }
+    .socials a:hover img{ transform:scale(1.08); }
+
+    /* hamburger and mobile menu */
+    .hamburger{ display:none; width:44px; height:44px; align-items:center; justify-content:center; border-radius:8px; cursor:pointer; background:transparent; border:0; }
+    .hamburger .bar{ width:22px; height:2.6px; background:var(--text); margin:3px 0; border-radius:2px; transition: transform .35s ease, opacity .2s; }
+    .hamburger.active .bar.b1{ transform: rotate(45deg) translate(4px,4px); }
+    .hamburger.active .bar.b2{ opacity:0; transform:translateX(8px); }
+    .hamburger.active .bar.b3{ transform: rotate(-45deg) translate(4px,-4px); }
+
+    .menu-backdrop{ position:fixed; inset:0; background:rgba(0,0,0,0.22); opacity:0; pointer-events:none; transition:opacity .28s; z-index:7800; }
+    .menu-backdrop.visible{ opacity:1; pointer-events:auto; }
+    .mobile-menu-wrap{ position:fixed; top:0; right:0; height:100vh; width:var(--nav-width); transform:translateX(110%); transition:transform .36s cubic-bezier(.2,.9,.2,1); z-index:7900; pointer-events:none; }
+    .mobile-menu-wrap.open{ transform:translateX(0); pointer-events:auto; }
+    .mobile-menu{ height:100%; padding:18px; background: rgba(255,255,255,0.92); color:#111; backdrop-filter: blur(8px); display:flex; flex-direction:column; gap:10px; border-left:1px solid rgba(255,255,255,0.6); }
+    body:not(.light-mode) .mobile-menu{ background: rgba(12,12,12,0.92); color:var(--text); border-left:1px solid rgba(255,255,255,0.04); }
+    .mobile-menu a{ padding:10px; border-radius:8px; font-weight:700; color:inherit; display:block; }
+
+    /* ========== Hero ========== */
+    .hero{ position:relative; height:58vh; min-height:260px; overflow:hidden; border-bottom-left-radius:12px; border-bottom-right-radius:12px; }
+    .hero video, .hero img { width:100%; height:100%; object-fit:cover; filter:brightness(.62); }
+    .hero-overlay{ position:absolute; inset:0; background:linear-gradient(180deg, rgba(0,0,0,0.18), rgba(0,0,0,0.36)); z-index:2; }
+    .hero-content{ position:absolute; inset:0; display:flex; align-items:center; justify-content:center; z-index:3; text-align:center; color:#fff; padding:0 18px; }
+
+    /* ========== Projects area ========== */
+    main{ max-width:var(--max-width); margin:18px auto; padding:0 16px 48px; }
+    .section-title{ font-size:26px; color:var(--accent); margin:12px 0; text-align:left; }
+
+    .filters{ display:flex; gap:8px; justify-content:center; margin:12px 0 18px; flex-wrap:wrap; }
+    .filters button{ background:transparent; border:1px solid var(--accent); color:var(--accent); padding:8px 12px; border-radius:8px; cursor:pointer; transition:all .2s; }
+    .filters button.active, .filters button:hover{ background:var(--accent); color:#061414; }
+
+    /* gallery grid */
+    .gallery-grid{ display:grid; grid-template-columns: repeat(auto-fit, minmax(240px,1fr)); gap:16px; align-items:start; }
+    .project-card{ position:relative; overflow:hidden; border-radius:12px; cursor:pointer; background:var(--panel); transition:transform .28s ease; }
+    .project-card:hover{ transform:scale(1.02); }
+    .project-media{ width:100%; height:220px; background:#000; display:flex; align-items:center; justify-content:center; }
+    .project-media img, .project-media video{ width:100%; height:100%; object-fit:cover; border-radius:12px; transition: transform .35s ease; }
+    .overlay{ position:absolute; bottom:0; left:0; width:100%; background: linear-gradient(180deg, rgba(0,0,0,0), rgba(0,0,0,0.65)); color:#fff; padding:12px; opacity:0; transition:opacity .25s; }
+    .project-card:hover .overlay{ opacity:1; }
+
+    /* small meta */
+    .project-title{ font-weight:800; margin:0; font-size:1rem; }
+    .project-cat{ color:var(--muted); font-size:0.9rem; margin-top:6px; }
+
+    /* ========== Lightbox ========== */
+    .lightbox{ position:fixed; inset:0; background:rgba(0,0,0,0.9); z-index:9500; display:none; align-items:center; justify-content:center; padding:16px; }
+    .lightbox.open{ display:flex; }
+    .lb-area{ max-width:1100px; width:100%; max-height:88vh; position:relative; display:flex; align-items:center; justify-content:center; }
+    .lb-media{ width:100%; max-height:88vh; border-radius:10px; background:#000; display:flex; align-items:center; justify-content:center; overflow:hidden; }
+    .lb-media img, .lb-media video{ width:100%; height:100%; object-fit:contain; max-height:88vh; }
+    .lb-caption{ position:absolute; left:18px; bottom:18px; color:#fff; font-weight:700; text-shadow:0 8px 20px rgba(0,0,0,0.6); }
+    .lb-close, .lb-prev, .lb-next{ position:absolute; top:18px; background:rgba(0,0,0,0.35); border:0; color:#fff; padding:10px; border-radius:10px; cursor:pointer; }
+    .lb-close{ right:18px; }
+    .lb-prev{ left:18px; top:50%; transform:translateY(-50%); }
+    .lb-next{ right:18px; top:50%; transform:translateY(-50%); }
+
+    /* scroll to top */
+    #scrollTop{ position:fixed; right:18px; bottom:18px; width:44px; height:44px; border-radius:8px; display:none; align-items:center; justify-content:center; background:var(--accent); color:#061414; z-index:8800; border:0; cursor:pointer; }
+
+    /* responsive */
+    @media (max-width:980px){ .project-media{ height:180px; } }
+    @media (max-width:620px){
+      nav.desktop{ display:none; }
+      .hamburger{ display:flex; }
+      .project-media{ height:160px; }
+      .overlay{ padding:10px; }
+    }
+  </style>
+</head>
+
+<body class="light-mode">
+
+  <!-- preloader -->
+  <div class="preloader" id="preloader" role="status" aria-live="polite">
+    <img src="assets/images/logo.jpg" alt="DIRECT BUILD GROUP" loading="lazy">
+  </div>
+
+  <div id="progress-bar" aria-hidden="true"></div>
+
+  <!-- header -->
+  <header class="main-header" role="banner">
+    <div class="left-header">
+      <div class="logo">
+        <a href="index.html"><img src="assets/images/logo.jpg" alt="logo" loading="lazy"></a>
+        <div class="brand">DIRECT BUILD GROUP</div>
+      </div>
+
+      <nav class="desktop" aria-label="Primary navigation">
+        <a href="index.html">Home</a>
+        <a href="about.html">About</a>
+        <a href="services.html">Services</a>
+        <a href="work.html" class="active" aria-current="page">Our Work</a>
+        <a href="contact.html">Contact</a>
+      </nav>
+    </div>
+
+    <div style="display:flex;align-items:center;gap:10px;">
+      <div class="socials" aria-hidden="false">
+        <a href="https://facebook.com" target="_blank"><img src="assets/images/Facebook logo.png" alt="Facebook" loading="lazy"></a>
+        <a href="https://www.instagram.com/directbuildgroup" target="_blank"><img src="assets/images/instagram.jpg" alt="Instagram" loading="lazy"></a>
+        <a href="https://linkedin.com" target="_blank"><img src="assets/images/linkendin.png" alt="LinkedIn" loading="lazy"></a>
+      </div>
+
+      <button id="themeToggle" title="Toggle light/dark" style="background:transparent;border:0;cursor:pointer;font-size:18px;">🌗</button>
+
+      <button class="hamburger" id="hamburgerBtn" aria-label="Toggle menu" aria-expanded="false">
+        <span class="bar b1"></span><span class="bar b2"></span><span class="bar b3"></span>
+      </button>
+    </div>
+  </header>
+
+  <!-- mobile menu backdrop & right slide-in -->
+  <div class="menu-backdrop" id="menuBackdrop" aria-hidden="true"></div>
+  <div class="mobile-menu-wrap" id="mobileMenu" aria-hidden="true">
+    <nav class="mobile-menu" aria-label="Mobile primary">
+      <a href="index.html">Home</a>
+      <a href="about.html">About</a>
+      <a href="services.html">Services</a>
+      <a href="work.html" class="active">Our Work</a>
+      <a href="contact.html">Contact</a>
+      <div style="flex:1"></div>
+      <div style="display:flex;gap:10px;">
+        <a href="https://facebook.com" target="_blank"><img src="assets/images/Facebook logo.png" alt="facebook" style="width:20px;height:20px;"></a>
+        <a href="https://www.instagram.com/directbuildgroup" target="_blank"><img src="assets/images/instagram.jpg" alt="instagram" style="width:20px;height:20px;"></a>
+        <a href="https://linkedin.com" target="_blank"><img src="assets/images/linkendin.png" alt="linkedin" style="width:20px;height:20px;"></a>
+      </div>
+    </nav>
+  </div>
+
+  <!-- hero -->
+  <section class="hero" aria-label="Projects hero">
+    <!-- you can swap the src to an image or small mp4 poster; using poster image for safety -->
+    <img src="assets/images/our-work-hero.jpg" alt="Projects hero" loading="lazy">
+    <div class="hero-overlay" aria-hidden="true"></div>
+    <div class="hero-content">
+      <div>
+        <h2 class="animate__animated animate__fadeInDown">Our Projects in Motion</h2>
+        <p style="opacity:0.92;margin-top:8px;">See our construction excellence through photos and videos.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- main content -->
+  <main role="main">
+    <h2 class="section-title">Featured Projects</h2>
+
+    <div class="filters" role="tablist" aria-label="Project filters">
+      <button class="active" data-filter="all">All</button>
+      <button data-filter="residential">Residential</button>
+      <button data-filter="commercial">Commercial</button>
+    </div>
+
+    <div class="gallery-grid" id="gallery" aria-live="polite">
+      <!-- Card 1 (image) -->
+      <article class="project-card" data-category="residential" data-type="image" data-src="assets/images/fence1.jpg" tabindex="0" aria-label="Fencing — click to open">
+        <div class="project-media">
+          <img data-src="assets/images/fence1-thumb.jpg" alt="Fencing" loading="lazy" class="thumb">
+        </div>
+        <div class="overlay">
+          <p class="project-title">Fencing Designs</p>
+          <p class="project-cat">Residential • Sustainable modern design</p>
+        </div>
+      </article>
+
+      <!-- Card 2 (video) -->
+      <article class="project-card" data-category="commercial" data-type="video" data-src="assets/videos/project2.mp4" tabindex="0" aria-label="Corporate Office Construction — click to open">
+        <div class="project-media">
+          <img data-src="assets/images/project2-thumb.jpg" alt="Project video thumbnail" loading="lazy" class="thumb">
+          <div style="position:absolute; right:12px; top:12px; background:rgba(0,0,0,0.45); color:#fff; padding:6px 8px; border-radius:8px; font-weight:700;">▶</div>
+        </div>
+        <div class="overlay">
+          <p class="project-title">Corporate Office Construction</p>
+          <p class="project-cat">Commercial • Built with precision</p>
+        </div>
+      </article>
+
+      <!-- Card 3 -->
+      <article class="project-card" data-category="residential" data-type="image" data-src="assets/images/floor1.jpg" tabindex="0" aria-label="Flooring Solutions — click to open">
+        <div class="project-media">
+          <img data-src="assets/images/floor1-thumb.jpg" alt="Flooring" loading="lazy" class="thumb">
+        </div>
+        <div class="overlay">
+          <p class="project-title">Flooring Solutions</p>
+          <p class="project-cat">Residential • Design meets function</p>
+        </div>
+      </article>
+
+      <!-- Card 4 -->
+      <article class="project-card" data-category="residential" data-type="image" data-src="assets/images/bathroom1.jpg" tabindex="0" aria-label="Luxury Villa — click to open">
+        <div class="project-media">
+          <img data-src="assets/images/bathroom1-thumb.jpg" alt="Bathroom" loading="lazy" class="thumb">
+        </div>
+        <div class="overlay">
+          <p class="project-title">Luxury Residential Villa</p>
+          <p class="project-cat">Residential • Sustainable design</p>
+        </div>
+      </article>
+
+      <!-- Card 5 (video) -->
+      <article class="project-card" data-category="commercial" data-type="video" data-src="assets/videos/project4.mp4" tabindex="0" aria-label="Bridge Infrastructure — click to open">
+        <div class="project-media">
+          <img data-src="assets/images/project4-thumb.jpg" alt="Bridge video" loading="lazy" class="thumb">
+          <div style="position:absolute; right:12px; top:12px; background:rgba(0,0,0,0.45); color:#fff; padding:6px 8px; border-radius:8px; font-weight:700;">▶</div>
+        </div>
+        <div class="overlay">
+          <p class="project-title">Bridge Infrastructure</p>
+          <p class="project-cat">Commercial • Engineering marvels</p>
+        </div>
+      </article>
+
+      <!-- Card 6 -->
+      <article class="project-card" data-category="residential" data-type="image" data-src="assets/images/fence1.jpg" tabindex="0" aria-label="Innovative Fencing — click to open">
+        <div class="project-media">
+          <img data-src="assets/images/fence1-2-thumb.jpg" alt="Innovative Fencing" loading="lazy" class="thumb">
+        </div>
+        <div class="overlay">
+          <p class="project-title">Innovative Fencing</p>
+          <p class="project-cat">Residential • Luxury design</p>
+        </div>
+      </article>
+    </div>
+  </main>
+
+  <!-- lightbox -->
+  <div class="lightbox" id="lightbox" aria-hidden="true" role="dialog" aria-label="Media viewer">
+    <div class="lb-area">
+      <div class="lb-media" id="lbMedia" aria-live="polite"></div>
+      <div class="lb-caption" id="lbCaption"></div>
+
+      <button class="lb-prev" id="lbPrev" aria-label="Previous">◀</button>
+      <button class="lb-next" id="lbNext" aria-label="Next">▶</button>
+      <button class="lb-close" id="lbClose" aria-label="Close">✕</button>
+    </div>
+  </div>
+
+  <footer class="main-footer" role="contentinfo" aria-label="Footer">
+    <p style="margin:6px 0;color:var(--muted)">© 2025 DIRECT BUILD GROUP. All rights reserved.</p>
+    <div style="display:flex;gap:12px;justify-content:center;margin-top:10px;">
+      <a href="https://facebook.com" target="_blank"><img src="assets/images/Facebook logo.png" alt="Facebook" loading="lazy" style="width:20px;height:20px;"></a>
+      <a href="https://www.instagram.com/directbuildgroup" target="_blank"><img src="assets/images/instagram.jpg" alt="Instagram" loading="lazy" style="width:20px;height:20px;"></a>
+      <a href="https://linkedin.com" target="_blank"><img src="assets/images/linkendin.png" alt="LinkedIn" loading="lazy" style="width:20px;height:20px;"></a>
+    </div>
+  </footer>
+
+  <button id="scrollTop" aria-label="Scroll to top">⬆</button>
+
+  <script>
+    /* ---------------- Elements ---------------- */
+    const preloader = document.getElementById('preloader');
+    const progressBar = document.getElementById('progress-bar');
+    const hamburgerBtn = document.getElementById('hamburgerBtn');
+    const mobileMenu = document.getElementById('mobileMenu');
+    const menuBackdrop = document.getElementById('menuBackdrop');
+    const themeToggle = document.getElementById('themeToggle');
+    const scrollTop = document.getElementById('scrollTop');
+    const gallery = Array.from(document.querySelectorAll('.project-card'));
+    const thumbs = Array.from(document.querySelectorAll('.thumb'));
+    const lightbox = document.getElementById('lightbox');
+    const lbMedia = document.getElementById('lbMedia');
+    const lbCaption = document.getElementById('lbCaption');
+    const lbClose = document.getElementById('lbClose');
+    const lbPrev = document.getElementById('lbPrev');
+    const lbNext = document.getElementById('lbNext');
+
+    /* ---------------- Preloader & initial lazy ---------------- */
+    window.addEventListener('load', () => {
+      setTimeout(()=> preloader.classList.add('hidden'), 300);
+      lazyLoadVisibleThumbs();
+    });
+
+    /* ---------------- Progress & scrollTop ---------------- */
+    window.addEventListener('scroll', () => {
+      const docHeight = document.documentElement.scrollHeight - document.documentElement.clientHeight;
+      const pct = (window.scrollY / (docHeight || 1)) * 100;
+      progressBar.style.width = Math.min(100, pct) + '%';
+      scrollTop.style.display = window.scrollY > 260 ? 'flex' : 'none';
+    });
+    scrollTop.addEventListener('click', () => window.scrollTo({ top:0, behavior:'smooth' }));
+
+    /* ---------------- Mobile menu handlers ---------------- */
+    function openMenu(){ mobileMenu.classList.add('open'); menuBackdrop.classList.add('visible'); hamburgerBtn.classList.add('active'); hamburgerBtn.setAttribute('aria-expanded','true'); document.body.style.overflow='hidden'; }
+    function closeMenu(){ mobileMenu.classList.remove('open'); menuBackdrop.classList.remove('visible'); hamburgerBtn.classList.remove('active'); hamburgerBtn.setAttribute('aria-expanded','false'); document.body.style.overflow=''; }
+    hamburgerBtn.addEventListener('click', ()=> mobileMenu.classList.contains('open') ? closeMenu() : openMenu());
+    menuBackdrop.addEventListener('click', closeMenu);
+    document.querySelectorAll('.mobile-menu a').forEach(a=>a.addEventListener('click', closeMenu));
+    document.addEventListener('keydown', e => { if(e.key === 'Escape') closeMenu(); });
+
+    /* ---------------- Theme toggle ---------------- */
+    themeToggle.addEventListener('click', ()=> document.body.classList.toggle('light-mode'));
+
+    /* ---------------- Lazy load thumbs ---------------- */
+    function loadThumb(img){
+      const src = img.dataset.src || img.getAttribute('src');
+      if(!src) return;
+      if(img.src !== src) img.src = src;
+      img.addEventListener('load', ()=> img.classList.add('visible'));
+    }
+    function lazyLoadVisibleThumbs(){
+      thumbs.forEach(img => {
+        const rect = img.getBoundingClientRect();
+        if(rect.top < window.innerHeight + 200) loadThumb(img);
+      });
+    }
+    if('IntersectionObserver' in window){
+      const io = new IntersectionObserver(entries => {
+        entries.forEach(entry => {
+          if(entry.isIntersecting){
+            loadThumb(entry.target);
+            io.unobserve(entry.target);
+          }
+        });
+      }, { rootMargin: '200px 0px' });
+      thumbs.forEach(i=> io.observe(i));
+    } else {
+      thumbs.forEach(i=> loadThumb(i));
+    }
+
+    /* ---------------- Filters ---------------- */
+    document.querySelectorAll('.filters button').forEach(btn=>{
+      btn.addEventListener('click', (e)=>{
+        document.querySelectorAll('.filters button').forEach(b=>b.classList.remove('active'));
+        btn.classList.add('active');
+        const f = btn.getAttribute('data-filter');
+        gallery.forEach(card => {
+          const cat = card.getAttribute('data-category');
+          card.style.display = (f === 'all' || cat === f) ? 'block' : 'none';
+        });
+      });
+    });
+
+    /* ---------------- Lightbox with arrows ---------------- */
+    let currentIndex = -1;
+    const items = gallery.map((el, idx) => ({
+      el,
+      src: el.getAttribute('data-src'),
+      type: el.getAttribute('data-type') || 'image',
+      title: el.querySelector('.project-title') ? el.querySelector('.project-title').textContent : '',
+      cat: el.querySelector('.project-cat') ? el.querySelector('.project-cat').textContent : ''
+    }));
+
+    function openLightbox(index){
+      if(index < 0 || index >= items.length) return;
+      currentIndex = index;
+      const item = items[index];
+      renderLB(item);
+      lightbox.classList.add('open');
+      lightbox.setAttribute('aria-hidden','false');
+      document.body.style.overflow = 'hidden';
+      preloadNeighbor(index+1); preloadNeighbor(index-1);
+    }
+
+    function closeLightbox(){
+      lightbox.classList.remove('open');
+      lightbox.setAttribute('aria-hidden','true');
+      lbMedia.innerHTML = '';
+      lbCaption.textContent = '';
+      document.body.style.overflow = '';
+    }
+
+    function renderLB(item){
+      lbMedia.innerHTML = '';
+      lbCaption.textContent = item.title + (item.cat ? ' — ' + item.cat : '');
+      if(item.type === 'video'){
+        const v = document.createElement('video');
+        v.src = item.src;
+        v.controls = true;
+        v.autoplay = true;
+        v.playsInline = true;
+        v.style.width = '100%';
+        v.style.maxHeight = '88vh';
+        lbMedia.appendChild(v);
+      } else {
+        const img = document.createElement('img');
+        img.src = item.src;
+        img.alt = item.title || '';
+        img.style.width = '100%';
+        img.style.maxHeight = '88vh';
+        lbMedia.appendChild(img);
+      }
+    }
+
+    function goNext(){ if(currentIndex < items.length - 1) openLightbox(currentIndex + 1); }
+    function goPrev(){ if(currentIndex > 0) openLightbox(currentIndex - 1); }
+
+    lbClose.addEventListener('click', closeLightbox);
+    lbNext.addEventListener('click', goNext);
+    lbPrev.addEventListener('click', goPrev);
+
+    // keyboard nav when lightbox open
+    document.addEventListener('keydown', e=>{
+      if(!lightbox.classList.contains('open')) return;
+      if(e.key === 'ArrowRight') goNext();
+      if(e.key === 'ArrowLeft') goPrev();
+      if(e.key === 'Escape') closeLightbox();
+    });
+
+    // close on backdrop click
+    lightbox.addEventListener('click', e=> { if(e.target === lightbox) closeLightbox(); });
+
+    // attach open handlers to visible cards (index in the gallery array)
+    gallery.forEach((card, idx) => {
+      card.addEventListener('click', ()=> openLightbox(idx));
+      card.addEventListener('keydown', e => { if(e.key === 'Enter' || e.key === ' ') { e.preventDefault(); openLightbox(idx); } });
+    });
+
+    function preloadNeighbor(index){
+      if(index < 0 || index >= items.length) return;
+      const it = items[index];
+      if(it.type === 'image'){ const im = new Image(); im.src = it.src; }
+      else { const link = document.createElement('link'); link.rel='preload'; link.as='video'; link.href = it.src; document.head.appendChild(link); }
+    }
+
+    /* ---------------- Touch swipe inside lightbox ---------------- */
+    (function(){
+      let startX = 0, dist = 0;
+      lbMedia.addEventListener('touchstart', e=> startX = e.touches[0].clientX, {passive:true});
+      lbMedia.addEventListener('touchmove', e=> dist = e.touches[0].clientX - startX, {passive:true});
+      lbMedia.addEventListener('touchend', ()=> {
+        if(dist > 60) goPrev();
+        if(dist < -60) goNext();
+        startX = 0; dist = 0;
+      }, {passive:true});
+    })();
+
+    /* ---------------- Touch gestures for gallery horizontal scroll (mobile) ---------------- */
+    (function touchScroll(){
+      const grid = document.getElementById('gallery');
+      let startX=0, scrollLeft=0, isDown=false;
+      grid.addEventListener('touchstart', e=> { isDown = true; startX = e.touches[0].pageX - grid.offsetLeft; scrollLeft = grid.scrollLeft; }, {passive:true});
+      grid.addEventListener('touchmove', e => {
+        if(!isDown) return;
+        const x = e.touches[0].pageX - grid.offsetLeft;
+        const walk = (x - startX) * 1;
+        grid.scrollLeft = scrollLeft - walk;
+      }, {passive:true});
+      grid.addEventListener('touchend', ()=> isDown=false);
+    })();
+
+    /* fallback: ensure thumbnails show if already loaded */
+    document.addEventListener('DOMContentLoaded', ()=> { thumbs.forEach(i=> { if(i.complete && i.naturalWidth) i.classList.add('visible'); }); });
+
+  </script>
+</body>
+</html>

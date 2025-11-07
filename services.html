@@ -1,0 +1,572 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Our Services | DIRECT BUILD GROUP</title>
+
+  <link rel="icon" href="assets/images/favicon.ico" type="image/x-icon">
+  <meta property="og:title" content="DIRECT BUILD GROUP — Services">
+  <meta property="og:description" content="Master-class photos & videos of our services.">
+  <meta property="og:image" content="assets/images/og-image.jpg">
+
+  <!-- Minimal external animation lib kept -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css">
+
+  <style>
+    /* ---------------- Variables & base ---------------- */
+    :root{
+      --accent: #17d4b5;
+      --accent-2: #ffcc00;
+      --bg-light: #ffffff;
+      --bg-dark: #0f1a1a;
+      --panel-light: #f7f9f8;
+      --panel-dark: #12171c;
+      --text-light: #0f1720;
+      --text-dark: #e6f6f3;
+      --nav-width: 200px;
+      --transition: 0.28s ease;
+    }
+    html,body{height:100%;margin:0;font-family:Inter, Poppins, system-ui, Arial; -webkit-font-smoothing:antialiased;}
+    a{color:var(--accent); text-decoration:none;}
+    img,video{display:block; max-width:100%; border-radius:8px;}
+
+    /* adaptive theme */
+    body { --bg: var(--bg-dark); --panel: var(--panel-dark); --text: var(--text-dark); --muted: #9aa4ad; }
+    body.light-mode { --bg: var(--bg-light); --panel: var(--panel-light); --text: var(--text-light); --muted: #6c757d; }
+    body { background:var(--bg); color:var(--text); }
+
+    /* ---------- Preloader ---------- */
+    .preloader {
+      position:fixed; inset:0; z-index:8000; display:flex; align-items:center; justify-content:center;
+      background:var(--bg); transition:opacity .45s ease, visibility .45s;
+    }
+    .preloader.hidden { opacity:0; visibility:hidden; pointer-events:none; }
+    .preloader img { width:140px; border-radius:8px; filter: drop-shadow(0 18px 40px rgba(0,0,0,0.18)); }
+    .preloader .credit { margin-top:12px; color:var(--muted); font-weight:700; font-size:13px; }
+
+    /* ---------- Progress bar ---------- */
+    #progressBar { position:fixed; top:0; left:0; height:4px; width:0; background:var(--accent); z-index:7900; transition:width .12s linear; }
+
+    /* ---------- Header ---------- */
+    .main-header {
+      position:sticky; top:0; z-index:7000; display:flex; align-items:center; justify-content:space-between;
+      gap:12px; padding:12px 16px; backdrop-filter: blur(6px);
+      background: linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01));
+      border-bottom: 1px solid rgba(255,255,255,0.02);
+    }
+    body.light-mode .main-header { background: linear-gradient(180deg, rgba(0,0,0,0.02), rgba(0,0,0,0.01)); }
+    .left-header { display:flex; align-items:center; gap:12px; }
+    .logo { display:flex; align-items:center; gap:10px; }
+    .logo img { width:88px; border-radius:6px; }
+    .brand { font-weight:800; color:var(--accent-2); }
+
+    nav.desktop-nav { display:flex; gap:14px; margin-left:12px; align-items:center; }
+    nav.desktop-nav a { font-weight:700; padding:8px 10px; border-radius:8px; color:var(--text); }
+    nav.desktop-nav a.active { color:var(--accent); }
+
+    .social-icons { display:flex; gap:8px; align-items:center; }
+    .social-icons img { width:22px; height:22px; transition: transform var(--transition); filter: none; }
+    .social-icons a:hover img { transform:scale(1.08); }
+
+    /* hamburger */
+    .hamburger { display:none; width:44px; height:44px; align-items:center; justify-content:center; border-radius:8px; cursor:pointer; background:transparent; border:0; }
+    .hamburger .bar { width:22px; height:2.6px; background:var(--text); margin:3px 0; border-radius:2px; transition: transform .35s ease, opacity .2s; }
+    .hamburger.active .bar.b1 { transform: rotate(45deg) translate(4px,4px); }
+    .hamburger.active .bar.b2 { opacity:0; transform: translateX(8px); }
+    .hamburger.active .bar.b3 { transform: rotate(-45deg) translate(4px,-4px); }
+
+    /* mobile menu wrapper (200px) */
+    .menu-backdrop { position:fixed; inset:0; background:rgba(0,0,0,0.22); opacity:0; pointer-events:none; transition:opacity .28s; z-index:6900; }
+    .menu-backdrop.visible { opacity:1; pointer-events:auto; }
+    .mobile-menu-wrapper { position:fixed; top:0; right:0; height:100vh; width:var(--nav-width); transform:translateX(110%); transition:transform .36s cubic-bezier(.2,.9,.2,1); z-index:7000; pointer-events:none; }
+    .mobile-menu-wrapper.open { transform:translateX(0); pointer-events:auto; }
+    .mobile-menu { height:100%; padding:18px; background: rgba(255,255,255,0.92); color:#111; backdrop-filter: blur(10px); display:flex; flex-direction:column; gap:10px; border-left:1px solid rgba(255,255,255,0.6); }
+    body.light-mode .mobile-menu { background: rgba(255,255,255,0.98); }
+    body:not(.light-mode) .mobile-menu { background: rgba(12,12,12,0.92); color:var(--text); border-left:1px solid rgba(255,255,255,0.04); }
+    .mobile-menu a { padding:10px; font-weight:700; border-radius:8px; display:block; color:inherit; }
+    .mobile-menu .spacer { flex:1; }
+
+    /* ---------- Hero ---------- */
+    .hero { height:40vh; min-height:260px; position:relative; overflow:hidden; border-bottom-left-radius:12px; border-bottom-right-radius:12px; }
+    .hero video, .hero img { width:100%; height:100%; object-fit:cover; filter:brightness(.62); }
+    .hero-overlay { position:absolute; inset:0; background:linear-gradient(180deg, rgba(0,0,0,0.18), rgba(0,0,0,0.38)); z-index:2; }
+    .hero-content { position:absolute; inset:0; display:flex; align-items:center; justify-content:center; z-index:3; text-align:center; color:#fff; padding:0 18px; }
+    .hero-content h2{ font-size:clamp(22px, 4vw, 36px); margin:0; line-height:1.05; }
+
+    /* ---------- Master gallery layout ---------- */
+    main { max-width:1200px; margin:18px auto; padding:0 16px 48px; }
+    .intro { display:flex; align-items:center; justify-content:space-between; gap:12px; margin:18px 0; }
+    .intro h3 { margin:0; font-size:20px; color:var(--accent); }
+    .intro p { margin:0; color:var(--muted); }
+
+    /* section block */
+    .svc { margin:26px 0; }
+    .svc h4 { margin:0 0 12px 0; font-size:18px; color:var(--text); }
+
+    /* Mixed masonry-like grid: use CSS grid with variable item sizes */
+    .gallery {
+      display:grid;
+      grid-template-columns: repeat(3, 1fr);
+      grid-auto-rows: 140px;
+      gap:12px;
+      align-items:start;
+    }
+
+    /* utility item sizing classes */
+    .g-item { position:relative; overflow:hidden; cursor:pointer; background:var(--panel); border-radius:8px; }
+    .g-item img, .g-item video { width:100%; height:100%; object-fit:cover; transition: transform .4s ease; display:block; }
+    .g-item:hover img, .g-item:hover video { transform: scale(1.06); }
+
+    .span-2 { grid-column: span 2; }
+    .span-row-2 { grid-row: span 2; }
+
+    /* caption overlay */
+    .g-caption { position:absolute; left:12px; bottom:12px; z-index:3; color:#fff; font-weight:700; text-shadow:0 6px 18px rgba(0,0,0,0.5); background:linear-gradient(90deg, rgba(0,0,0,0.25), rgba(0,0,0,0.15)); padding:6px 10px; border-radius:6px; backdrop-filter: blur(2px); }
+
+    /* ensure videos muted inline for preview */
+    .g-item video[muted] { pointer-events:none; }
+
+    /* responsiveness */
+    @media (max-width:980px) {
+      .gallery { grid-template-columns: repeat(2,1fr); grid-auto-rows: 120px; }
+    }
+    @media (max-width:620px) {
+      nav.desktop-nav { display:none; }
+      .hamburger { display:flex; }
+      .gallery { grid-template-columns: 1fr; grid-auto-rows: 160px; }
+    }
+
+    /* CTA */
+    .cta { text-align:center; margin-top:18px; padding:18px; background:var(--panel); border-radius:10px; color:var(--text); }
+    .btn { display:inline-block; padding:10px 18px; border-radius:28px; background:var(--accent); color:#061414; font-weight:800; }
+
+    /* lightbox overlay */
+    .lightbox {
+      position:fixed; inset:0; background:rgba(0,0,0,0.88); z-index:9000; display:none; align-items:center; justify-content:center; padding:18px;
+    }
+    .lightbox.open { display:flex; }
+    .lb-content { max-width:1100px; max-height:88vh; width:100%; display:flex; align-items:center; justify-content:center; position:relative; }
+    .lb-media { width:100%; max-height:88vh; border-radius:8px; background:#000; }
+    .lb-caption { position:absolute; left:18px; bottom:18px; color:#fff; font-weight:700; text-shadow:0 6px 18px rgba(0,0,0,0.6); }
+    .lb-close, .lb-prev, .lb-next {
+      position:absolute; top:18px; background:rgba(0,0,0,0.35); border:0; color:#fff; padding:8px; border-radius:8px; cursor:pointer;
+    }
+    .lb-close { right:18px; }
+    .lb-prev { left:18px; top:50%; transform:translateY(-50%); }
+    .lb-next { right:18px; top:50%; transform:translateY(-50%); }
+    .lb-controls { display:flex; gap:8px; align-items:center; position:absolute; right:18px; bottom:18px; }
+
+    /* small helpers */
+    .sr-only { position:absolute; left:-9999px; top:auto; width:1px; height:1px; overflow:hidden; }
+    #scrollTopBtn { position:fixed; right:16px; bottom:16px; width:44px; height:44px; border-radius:8px; display:none; align-items:center; justify-content:center; background:var(--accent); color:#061414; z-index:8800; border:0; cursor:pointer; }
+
+  </style>
+</head>
+<body class="light-mode">
+
+  <!-- PRELOADER -->
+  <div class="preloader" id="preloader" aria-hidden="false">
+    <div style="text-align:center">
+      <img src="assets/images/logo.jpg" alt="DIRECT BUILD GROUP logo" loading="lazy">
+      <div class="credit">DIRECT BUILD GROUP</div>
+    </div>
+  </div>
+
+  <div id="progressBar" aria-hidden="true"></div>
+
+  <!-- MAIN HEADER -->
+  <header class="main-header" role="banner" aria-label="Main header">
+    <div class="left-header">
+      <div class="logo">
+        <a href="index.html"><img src="assets/images/logo.jpg" alt="logo" loading="lazy"></a>
+        <div class="brand">DIRECT BUILD GROUP</div>
+      </div>
+
+      <nav class="desktop-nav" aria-label="Primary navigation">
+        <a href="index.html">Home</a>
+        <a href="about.html">About</a>
+        <a href="services.html" class="active" aria-current="page">Services</a>
+        <a href="work.html">Our Work</a>
+        <a href="contact.html">Contact</a>
+      </nav>
+    </div>
+
+    <div style="display:flex;align-items:center;gap:8px;">
+      <div class="social-icons" aria-hidden="false">
+        <a href="https://facebook.com" target="_blank" title="Facebook"><img src="assets/images/Facebook logo.png" alt="facebook" loading="lazy"></a>
+        <a href="https://www.instagram.com/directbuildgroup" target="_blank" title="Instagram"><img src="assets/images/instagram.jpg" alt="instagram" loading="lazy"></a>
+        <a href="https://linkedin.com" target="_blank" title="LinkedIn"><img src="assets/images/linkendin.png" alt="linkedin" loading="lazy"></a>
+      </div>
+
+      <button id="themeToggle" title="Toggle theme" style="background:transparent;border:0;cursor:pointer;font-size:18px;">🌗</button>
+
+      <button class="hamburger" id="hamburgerBtn" aria-label="Toggle menu" aria-expanded="false">
+        <span class="bar b1"></span><span class="bar b2"></span><span class="bar b3"></span>
+      </button>
+    </div>
+  </header>
+
+  <!-- mobile menu backdrop & menu -->
+  <div class="menu-backdrop" id="menuBackdrop" aria-hidden="true"></div>
+  <div class="mobile-menu-wrapper" id="mobileMenu" aria-hidden="true">
+    <nav class="mobile-menu" aria-label="Mobile primary">
+      <a href="index.html">Home</a>
+      <a href="about.html">About</a>
+      <a href="services.html" class="active">Services</a>
+      <a href="work.html">Our Work</a>
+      <a href="contact.html">Contact</a>
+      <div class="spacer"></div>
+      <div style="display:flex;gap:10px;">
+        <a href="https://facebook.com" target="_blank"><img src="assets/images/Facebook logo.png" alt="facebook" style="width:20px;height:20px;"></a>
+        <a href="https://www.instagram.com/directbuildgroup" target="_blank"><img src="assets/images/instagram.jpg" alt="instagram" style="width:20px;height:20px;"></a>
+        <a href="https://linkedin.com" target="_blank"><img src="assets/images/linkendin.png" alt="linkedin" style="width:20px;height:20px;"></a>
+      </div>
+    </nav>
+  </div>
+
+  <!-- HERO -->
+  <section class="hero" aria-label="Hero">
+    <video id="heroVideo" autoplay muted loop playsinline poster="assets/images/construction-hero.jpg" loading="lazy">
+      <source src="assets/videos/hero.mp4" type="video/mp4">
+    </video>
+    <div class="hero-overlay"></div>
+    <div class="hero-content">
+      <h2 class="animate__animated animate__fadeInDown">Our Services in Photos & Video</h2>
+    </div>
+  </section>
+
+  <main>
+    <div class="intro">
+      <div>
+        <h3>Master Gallery</h3>
+        <p class="small-muted">Tap any image or video to open a full-screen lightbox. Swipe left/right on mobile to browse.</p>
+      </div>
+      <div style="display:flex;gap:8px;align-items:center;">
+        <a href="contact.html" class="btn">Get a Quote</a>
+      </div>
+    </div>
+
+    <!-- Painting Section -->
+    <section class="svc" id="painting">
+      <h4>Painting</h4>
+      <div class="gallery" role="list">
+        <div class="g-item span-2 span-row-2" role="listitem" data-type="image" data-src="assets/images/painting1.jpg" data-caption="Exterior modern finish — Project A">
+          <img data-src="assets/images/painting1-thumb.jpg" alt="Painting 1" class="lazy">
+          <div class="g-caption">Exterior modern finish</div>
+        </div>
+
+        <div class="g-item" role="listitem" data-type="image" data-src="assets/images/painting2.jpg" data-caption="Interior premium coats — Project B">
+          <img data-src="assets/images/painting2-thumb.jpg" alt="Painting 2" class="lazy">
+        </div>
+
+        <div class="g-item" role="listitem" data-type="video" data-src="assets/videos/painting-clip.mp4" data-caption="Speed coating — time-lapse">
+          <img data-src="assets/images/painting-video-thumb.jpg" alt="Painting video thumbnail" class="lazy">
+          <div style="position:absolute; right:10px; top:10px; background:rgba(0,0,0,0.45); color:#fff; padding:6px 8px; border-radius:6px; font-weight:700;">▶</div>
+        </div>
+
+        <div class="g-item" role="listitem" data-type="image" data-src="assets/images/painting3.jpg" data-caption="Accent wall detail — Project C">
+          <img data-src="assets/images/painting3-thumb.jpg" alt="Painting 3" class="lazy">
+        </div>
+      </div>
+    </section>
+
+    <!-- Remodels Section -->
+    <section class="svc" id="remodels">
+      <h4>Remodels</h4>
+      <div class="gallery" role="list">
+        <div class="g-item span-2" role="listitem" data-type="image" data-src="assets/images/remodel1.jpg" data-caption="Open-plan kitchen remodel">
+          <img data-src="assets/images/remodel1-thumb.jpg" alt="Remodel 1" class="lazy">
+        </div>
+
+        <div class="g-item" role="listitem" data-type="video" data-src="assets/videos/remodel-tour.mp4" data-caption="Walkthrough — Renovation X">
+          <img data-src="assets/images/remodel-video-thumb.jpg" alt="Remodel video" class="lazy">
+          <div style="position:absolute; right:10px; top:10px; background:rgba(0,0,0,0.45); color:#fff; padding:6px 8px; border-radius:6px; font-weight:700;">▶</div>
+        </div>
+
+        <div class="g-item" role="listitem" data-type="image" data-src="assets/images/remodel2.jpg" data-caption="Bathroom upgrade">
+          <img data-src="assets/images/remodel2-thumb.jpg" alt="Remodel 2" class="lazy">
+        </div>
+
+        <div class="g-item" role="listitem" data-type="image" data-src="assets/images/remodel3.jpg" data-caption="Structural retrofit">
+          <img data-src="assets/images/remodel3-thumb.jpg" alt="Remodel 3" class="lazy">
+        </div>
+      </div>
+    </section>
+
+    <!-- Porches Section -->
+    <section class="svc" id="porches">
+      <h4>Porches</h4>
+      <div class="gallery" role="list">
+        <div class="g-item" role="listitem" data-type="image" data-src="assets/images/porch1.jpg" data-caption="Cozy timber porch">
+          <img data-src="assets/images/porch1-thumb.jpg" alt="Porch 1" class="lazy">
+        </div>
+
+        <div class="g-item span-2 span-row-2" role="listitem" data-type="image" data-src="assets/images/porch2.jpg" data-caption="Modern screened porch">
+          <img data-src="assets/images/porch2-thumb.jpg" alt="Porch 2" class="lazy">
+        </div>
+
+        <div class="g-item" role="listitem" data-type="image" data-src="assets/images/porch3.jpg" data-caption="Lighting & finishes">
+          <img data-src="assets/images/porch3-thumb.jpg" alt="Porch 3" class="lazy">
+        </div>
+      </div>
+    </section>
+
+    <!-- Decks Section -->
+    <section class="svc" id="decks">
+      <h4>Decks</h4>
+      <div class="gallery" role="list">
+        <div class="g-item" role="listitem" data-type="image" data-src="assets/images/deck1.jpg" data-caption="Composite deck — Lakeside">
+          <img src="assets/images/deck.jpeg" alt="Deck 1" class="lazy">
+        </div>
+
+        <div class="g-item" role="listitem" data-type="video" data-src="assets/videos/deck-build.mp4" data-caption="Deck construction timelapse">
+          <img src="assets/videos/2759484-uhd_3840_2160_30fps.mp4" alt="Deck video" class="lazy">
+          <div style="position:absolute; right:10px; top:10px; background:rgba(59, 38, 38, 0.45); color:#fff; padding:6px 8px; border-radius:6px; font-weight:700;">▶</div>
+        </div>
+
+        <div class="g-item span-2" role="listitem" data-type="image" data-src="assets/images/deck2.jpg" data-caption="Multi-level deck">
+          <img src="assets/images/deck.jpeg" alt="Deck 2" class="lazy">
+        </div>
+      </div>
+    </section>
+
+    <div class="cta">
+      <strong>Want these results on your site?</strong>
+      <p class="small-muted">Contact us for a project quote or on-site visit.</p>
+      <a class="btn" href="contact.html">Get a Quote</a>
+    </div>
+  </main>
+
+  <footer style="padding:18px;text-align:center;">
+    <small style="color:var(--muted)">© 2025 DIRECT BUILD GROUP — All rights reserved.</small>
+  </footer>
+
+  <!-- lightbox -->
+  <div class="lightbox" id="lightbox" role="dialog" aria-hidden="true" aria-modal="true">
+    <div class="lb-content" id="lbContent">
+      <div class="lb-media" id="lbMedia" aria-live="polite"></div>
+      <div class="lb-caption" id="lbCaption"></div>
+
+      <button class="lb-prev" id="lbPrev" aria-label="Previous">◀</button>
+      <button class="lb-next" id="lbNext" aria-label="Next">▶</button>
+      <button class="lb-close" id="lbClose" aria-label="Close">✕</button>
+    </div>
+  </div>
+
+  <button id="scrollTopBtn" aria-label="Scroll to top">⬆</button>
+
+  <script>
+    /************ Elements ************/
+    const preloader = document.getElementById('preloader');
+    const progressBar = document.getElementById('progressBar');
+    const hamburger = document.getElementById('hamburgerBtn');
+    const mobileMenu = document.getElementById('mobileMenu');
+    const menuBackdrop = document.getElementById('menuBackdrop');
+    const themeToggle = document.getElementById('themeToggle');
+    const scrollTopBtn = document.getElementById('scrollTopBtn');
+
+    const galleryItems = Array.from(document.querySelectorAll('.g-item'));
+    const lazyThumbs = Array.from(document.querySelectorAll('img.lazy'));
+    const lightbox = document.getElementById('lightbox');
+    const lbMedia = document.getElementById('lbMedia');
+    const lbCaption = document.getElementById('lbCaption');
+    const lbClose = document.getElementById('lbClose');
+    const lbPrev = document.getElementById('lbPrev');
+    const lbNext = document.getElementById('lbNext');
+
+    /************ Preloader & lazy initial ************/
+    window.addEventListener('load', () => {
+      setTimeout(()=> preloader.classList.add('hidden'), 350); // brief logo
+      // kick off lazy loading for visible thumbs
+      lazyLoadVisibleThumbs();
+    });
+
+    /************ Progress & Scroll Top ************/
+    window.addEventListener('scroll', () => {
+      const docHeight = document.documentElement.scrollHeight - document.documentElement.clientHeight;
+      const pct = (window.scrollY / (docHeight || 1)) * 100;
+      progressBar.style.width = Math.min(100, pct) + '%';
+      scrollTopBtn.style.display = window.scrollY > 260 ? 'flex' : 'none';
+    });
+    scrollTopBtn.addEventListener('click', () => window.scrollTo({top:0, behavior:'smooth'}));
+
+    /************ Mobile menu ************/
+    function openMenu(){ mobileMenu.classList.add('open'); menuBackdrop.classList.add('visible'); hamburger.classList.add('active'); hamburger.setAttribute('aria-expanded','true'); document.body.style.overflow='hidden'; }
+    function closeMenu(){ mobileMenu.classList.remove('open'); menuBackdrop.classList.remove('visible'); hamburger.classList.remove('active'); hamburger.setAttribute('aria-expanded','false'); document.body.style.overflow=''; }
+    hamburger.addEventListener('click', ()=> mobileMenu.classList.contains('open') ? closeMenu() : openMenu());
+    menuBackdrop.addEventListener('click', closeMenu);
+    document.querySelectorAll('.mobile-menu a').forEach(a => a.addEventListener('click', closeMenu));
+    document.addEventListener('keydown', e => { if(e.key==='Escape') closeMenu(); });
+
+    /************ Theme toggle (persist optional) ************/
+    themeToggle.addEventListener('click', () => {
+      document.body.classList.toggle('light-mode');
+      // optional: persist user choice
+      // localStorage.setItem('theme', document.body.classList.contains('light-mode') ? 'light' : 'dark');
+    });
+
+    /************ Lazy load thumbnails (IntersectionObserver) ************/
+    function loadThumb(img){
+      const src = img.dataset.src || img.getAttribute('src');
+      if(!src) return;
+      if(img.src !== src) img.src = src;
+      img.addEventListener('load', ()=> img.classList.add('visible'));
+    }
+    function lazyLoadVisibleThumbs(){
+      lazyThumbs.forEach(img => {
+        const rect = img.getBoundingClientRect();
+        if(rect.top < window.innerHeight + 200) loadThumb(img);
+      });
+    }
+    if('IntersectionObserver' in window){
+      const io = new IntersectionObserver(entries => {
+        entries.forEach(entry => {
+          if(entry.isIntersecting){
+            loadThumb(entry.target);
+            io.unobserve(entry.target);
+          }
+        });
+      }, {rootMargin:'200px 0px'});
+      lazyThumbs.forEach(i => io.observe(i));
+    } else {
+      lazyThumbs.forEach(i=> loadThumb(i));
+    }
+
+    /************ Lightbox logic ************/
+    let currentIndex = -1;
+    const items = galleryItems.map((el, idx) => {
+      return {
+        el,
+        src: el.getAttribute('data-src'),
+        type: el.getAttribute('data-type') || 'image',
+        caption: el.getAttribute('data-caption') || ''
+      };
+    });
+
+    function openLightbox(index){
+      if(index < 0 || index >= items.length) return;
+      currentIndex = index;
+      const item = items[index];
+      renderLightbox(item);
+      lightbox.classList.add('open');
+      lightbox.setAttribute('aria-hidden','false');
+      document.body.style.overflow = 'hidden';
+      // preload neighbors
+      preloadNeighbor(index+1); preloadNeighbor(index-1);
+    }
+
+    function closeLightbox(){
+      lightbox.classList.remove('open');
+      lightbox.setAttribute('aria-hidden','true');
+      lbMedia.innerHTML = '';
+      lbCaption.textContent = '';
+      document.body.style.overflow = '';
+    }
+
+    function renderLightbox(item){
+      lbMedia.innerHTML = '';
+      lbCaption.textContent = item.caption || '';
+      if(item.type === 'video'){
+        const video = document.createElement('video');
+        video.className = 'lb-video';
+        video.src = item.src;
+        video.controls = true;
+        video.autoplay = true;
+        video.playsInline = true;
+        video.style.width = '100%';
+        video.style.maxHeight = '88vh';
+        lbMedia.appendChild(video);
+      } else {
+        const img = document.createElement('img');
+        img.src = item.src;
+        img.alt = item.caption || '';
+        img.style.width = '100%';
+        img.style.maxHeight = '88vh';
+        lbMedia.appendChild(img);
+      }
+    }
+
+    function goNext(){
+      if(currentIndex < items.length - 1) openLightbox(currentIndex + 1);
+    }
+    function goPrev(){
+      if(currentIndex > 0) openLightbox(currentIndex - 1);
+    }
+    lbClose.addEventListener('click', closeLightbox);
+    lbNext.addEventListener('click', goNext);
+    lbPrev.addEventListener('click', goPrev);
+
+    // keyboard navigation
+    document.addEventListener('keydown', e => {
+      if(!lightbox.classList.contains('open')) return;
+      if(e.key === 'ArrowRight') goNext();
+      if(e.key === 'ArrowLeft') goPrev();
+      if(e.key === 'Escape') closeLightbox();
+    });
+
+    // close when clicking outside media
+    lightbox.addEventListener('click', (e) => { if(e.target === lightbox) closeLightbox(); });
+
+    // attach click handlers to grid items
+    galleryItems.forEach((gi, idx) => {
+      gi.addEventListener('click', (e) => {
+        // ensure src loaded for full media — if thumb had data-src and not full src, swap
+        const itemSrc = gi.getAttribute('data-src');
+        if(!itemSrc) return;
+        openLightbox(idx);
+      });
+    });
+
+    // neighbor preload
+    function preloadNeighbor(index){
+      if(index < 0 || index >= items.length) return;
+      const it = items[index];
+      if(it.type === 'image'){
+        const im = new Image();
+        im.src = it.src;
+      } else {
+        // preload small portion of video by creating element (browser policy may limit)
+        const v = document.createElement('link');
+        v.rel = 'preload';
+        v.as = 'video';
+        v.href = it.src;
+        document.head.appendChild(v);
+      }
+    }
+
+    /************ Swipe gestures for lightbox (mobile) ************/
+    (function attachSwipe(){
+      let startX=0, dist=0;
+      lbMedia.addEventListener('touchstart', e => startX = e.touches[0].clientX, {passive:true});
+      lbMedia.addEventListener('touchmove', e => { dist = e.touches[0].clientX - startX; }, {passive:true});
+      lbMedia.addEventListener('touchend', () => {
+        if(dist > 60) goPrev();
+        if(dist < -60) goNext();
+        startX = 0; dist = 0;
+      }, {passive:true});
+    })();
+
+    /************ Touch scroll for galleries (allow horizontal scrolling) ************/
+    (function touchScroll(){
+      const sections = document.querySelectorAll('.gallery');
+      sections.forEach(section => {
+        let startX=0, scrollLeft=0, isDown=false;
+        section.addEventListener('touchstart', e => { isDown = true; startX = e.touches[0].pageX - section.offsetLeft; scrollLeft = section.scrollLeft; }, {passive:true});
+        section.addEventListener('touchmove', e => {
+          if(!isDown) return;
+          const x = e.touches[0].pageX - section.offsetLeft;
+          const walk = (x - startX) * 1;
+          section.scrollLeft = scrollLeft - walk;
+        }, {passive:true});
+        section.addEventListener('touchend', ()=> isDown=false);
+      });
+    })();
+
+    /************ Ensure thumbnails visible after DOM ready ************/
+    document.addEventListener('DOMContentLoaded', ()=> {
+      lazyThumbs.forEach(img => { if(img.complete && img.naturalWidth) img.classList.add('visible'); });
+    });
+  </script>
+</body>
+</html>
